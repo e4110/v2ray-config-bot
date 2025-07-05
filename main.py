@@ -1,4 +1,3 @@
-
 import os
 import telebot
 from telebot import types
@@ -38,10 +37,7 @@ def handle_start(message):
         send_latest_config(user_id)
         show_buttons(user_id)
     else:
-        msg = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:\n@LiveTetherPrice"
-
-
-msg = "پس از فشردن دکمه 'بررسی عضویت' را بزنید."
+        msg = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:\n@LiveTetherPrice\n\nپس از فشردن دکمه 'بررسی عضویت' را بزنید."
         markup = types.InlineKeyboardMarkup()
         markup.add(types.InlineKeyboardButton("🔄 بررسی عضویت", callback_data="check"))
         bot.send_message(user_id, msg, reply_markup=markup)
@@ -60,8 +56,7 @@ def handle_buttons(message):
         else:
             bot.send_message(user_id, "⛔️ برای دریافت مجدد کانفیگ، ابتدا عضو کانال شوید: @LiveTetherPrice")
     elif message.text == "📨 ارتباط با ادمین":
-        bot.send_message(user_id, "🔗 ارتباط با ادمین:
-@YourUsername")
+        bot.send_message(user_id, "🔗 ارتباط با ادمین:\n@YourUsername")  # ← ← ← یوزرنیم ادمین رو اینجا بذار
 
 @bot.callback_query_handler(func=lambda call: call.data == "check")
 def handle_check(call):
