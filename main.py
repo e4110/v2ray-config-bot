@@ -41,7 +41,7 @@ def handle_start(message):
         msg = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:\n@LiveTetherPrice"
 
 
-سپس دکمه «بررسی عضویت» را بزنید.")
+msg = "پس از فشردن دکمه 'بررسی عضویت' را بزنید."
         markup = types.InlineKeyboardMarkup()
         markup.add(types.InlineKeyboardButton("🔄 بررسی عضویت", callback_data="check"))
         bot.send_message(user_id, msg, reply_markup=markup)
