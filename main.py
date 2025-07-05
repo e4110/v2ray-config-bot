@@ -38,9 +38,8 @@ def handle_start(message):
         send_latest_config(user_id)
         show_buttons(user_id)
     else:
-        msg = ("📛 برای دریافت فیلترشکن رایگان، ابتدا عضو کانال زیر شوید:
-"
-               "📡 @LiveTetherPrice
+        msg = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:\n@LiveTetherPrice"
+
 
 سپس دکمه «بررسی عضویت» را بزنید.")
         markup = types.InlineKeyboardMarkup()
