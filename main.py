@@ -23,10 +23,10 @@ def handle_start(message):
         send_latest_config(user_id)
         show_buttons(user_id)
     else:
-        msg = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:
-@LiveTetherPrice
+        msg1 = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:\n@LiveTetherPrice"
+        msg2 = "پس از عضویت، دکمه «🔄 بررسی عضویت» را بزنید."
 
-پس از عضویت، دکمه 'بررسی عضویت' را بزنید."
+
         markup = types.InlineKeyboardMarkup()
         markup.add(types.InlineKeyboardButton("🔄 بررسی عضویت", callback_data="check"))
         bot.send_message(user_id, msg, reply_markup=markup)
