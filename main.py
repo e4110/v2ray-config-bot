@@ -1,13 +1,21 @@
 import os
 import telebot
 from telebot import types
+from fastapi import FastAPI
+import threading
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL_ID = -1002549789972
-ADMIN_ID = 683844720  # آیدی عددی ادمین
+ADMIN_ID = 683844720  # عددی
 
 bot = telebot.TeleBot(BOT_TOKEN)
 CONFIG_FILE = "latest_config.txt"
+
+app = FastAPI()  # برای Railway
+
+@app.get("/")
+def read_root():
+    return {"status": "Bot is running"}
 
 def is_user_member(user_id):
     try:
@@ -37,10 +45,11 @@ def handle_start(message):
         send_latest_config(user_id)
         show_buttons(user_id)
     else:
-        msg = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:\n@LiveTetherPrice\n\nپس از فشردن دکمه 'بررسی عضویت' را بزنید."
+        msg1 = "🍥 برای دریافت کانفیگ رایگان، ابتدا عضو کانال زیر شوید:\n@LiveTetherPrice"
+        msg2 = "پس از عضویت، دکمه «🔄 بررسی عضویت» را بزنید."
         markup = types.InlineKeyboardMarkup()
         markup.add(types.InlineKeyboardButton("🔄 بررسی عضویت", callback_data="check"))
-        bot.send_message(user_id, msg, reply_markup=markup)
+        bot.send_message(user_id, msg1 + "\n\n" + msg2, reply_markup=markup)
 
 def show_buttons(chat_id):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -56,7 +65,7 @@ def handle_buttons(message):
         else:
             bot.send_message(user_id, "⛔️ برای دریافت مجدد کانفیگ، ابتدا عضو کانال شوید: @LiveTetherPrice")
     elif message.text == "📨 ارتباط با ادمین":
-        bot.send_message(user_id, "🔗 ارتباط با ادمین:\n@YourUsername")  # ← ← ← یوزرنیم ادمین رو اینجا بذار
+        bot.send_message(user_id, "🔗 ارتباط با ادمین:\n@YourUsername")
 
 @bot.callback_query_handler(func=lambda call: call.data == "check")
 def handle_check(call):
@@ -68,5 +77,9 @@ def handle_check(call):
     else:
         bot.answer_callback_query(call.id, "⛔️ هنوز عضو نیستید.")
 
-print("ربات در حال اجرا است...")
-bot.infinity_polling()
+def start_bot():
+    print("✅ ربات در حال اجرا است...")
+    bot.infinity_polling()
+
+# اجرای ربات در ترد جدا
+threading.Thread(target=start_bot).start()
