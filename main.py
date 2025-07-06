@@ -60,11 +60,7 @@ def handle_all_messages(message):
         return
 
     if user_id != ADMIN_ID:
-        bot.send_message(ADMIN_ID, f"📩 پیام از کاربر:
-
-{message.text}
-
-👤 ID: {user_id}")
+        bot.send_message(ADMIN_ID, f"📩 پیام از کاربر: {message.text} 👤 ID: {user_id}")
         bot.send_message(user_id, "📨 پیام شما برای ادمین ارسال شد. منتظر پاسخ باشید.")
 
     if message.text == "📡 دریافت کانفیگ" or message.text == "📡 قطع شدم":
