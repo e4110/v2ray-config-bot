@@ -4,7 +4,7 @@ from telebot import types
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL_ID = -1002549789972
-ADMIN_ID = 683844720
+ADMIN_ID = 1511064812
 
 bot = telebot.TeleBot(BOT_TOKEN)
 CONFIG_FILE = "latest_config.txt"
