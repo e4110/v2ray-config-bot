@@ -52,7 +52,8 @@ def handle_all_messages(message):
         reply_text = message.text
         try:
             original_user_id = int(message.reply_to_message.text.split("ID: ")[-1])
-            bot.send_message(original_user_id, f"📨 پاسخ ادمین:
+            bot.send_message(original_user_id, f"✉️ پاسخ ادمین: {some_variable}
+
 {reply_text}")
             bot.reply_to(message, "✅ پیام ارسال شد.")
         except:
